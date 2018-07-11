@@ -1,0 +1,1 @@
+const timeLapse = require('./src/time-lapse');
