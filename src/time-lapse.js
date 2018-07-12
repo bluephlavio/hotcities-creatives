@@ -1,9 +1,11 @@
 const path = require('path');
 const _ = require('underscore');
+const $ = require('jquery');
 const p5 = require('p5');
 
 // canvas
-const canvasContainer = document.getElementById('canvas-container');
+const canvasContainer = $('#canvas-container')
+	.get(0);
 
 function getCanvasSize() {
 	return [canvasContainer.clientWidth, canvasContainer.clientHeight];
@@ -42,7 +44,8 @@ function webMerc(lng, lat, zoom) {
 // colors and graphics
 const bgColor = [25, 26, 26];
 const dataColor = [252, 144, 12];
-const textSize = 16;
+const textSize = 13;
+const textPosition = [0, 170];
 const minRadius = 15;
 const maxRadius = 100;
 const minAlpha = 10;
@@ -87,22 +90,21 @@ let s = (sketch) => {
 		sketch.textStyle(sketch.NORMAL);
 
 		sketch.textAlign(sketch.RIGHT, sketch.CENTER);
-		sketch.text(`${record.city.name} `, 0, 200);
+		sketch.text(`${record.city.name} `, ...textPosition);
 
 		sketch.textAlign(sketch.CENTER, sketch.CENTER);
-		sketch.text('|', 0, 200);
+		sketch.text('|', ...textPosition);
 
 		sketch.textAlign(sketch.LEFT, sketch.CENTER);
-		sketch.text(` ${Math.round(record.temp)} °C`, 0, 200);
+		sketch.text(` ${Math.round(record.temp)} °C`, ...textPosition);
 	}
 
 	function renderTimestamp(record) {
 		sketch.stroke(...dataColor, 100);
-		sketch.textSize(12);
 		sketch.textStyle(sketch.NORMAL);
 
 		sketch.textAlign(sketch.LEFT, sketch.CENTER);
-		sketch.text(` ${record.timestamp.replace('T', ' ').substr(0, 16)}`, 0, 220);
+		sketch.text(` ${record.timestamp.replace('T', ' ').substr(0, 16)}`, textPosition[0], textPosition[1] + 20);
 	}
 
 	sketch.preload = () => {
@@ -144,7 +146,8 @@ let s = (sketch) => {
 		sketch.createCanvas(...getCanvasSize())
 			.parent('canvas-container');
 		sketch.frameRate(fps);
-		sketch.textFont('Quicksand', textSize);
+		sketch.textFont('Quicksand');
+		sketch.textSize(textSize);
 	}
 
 	sketch.draw = () => {
