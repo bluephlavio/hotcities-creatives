@@ -25,8 +25,8 @@ const mapUri = `https://api.mapbox.com/styles/v1/bluephlavio/cjin553wo0vr92rrynv
 
 // hotcities.world
 const apiEndpoint = 'http://www.hotcities.world/api/';
-const citiesJsonFile = path.join(__dirname, '..', '..', 'data', 'cities.json');
-const recordsJsonFile = path.join(__dirname, '..', '..', 'data', 'records.json');
+const citiesJsonFile = path.join(__dirname, '..', 'data', 'cities.json');
+const recordsJsonFile = path.join(__dirname, '..', 'data', 'records.json');
 
 // web mercator
 function webMerc(lng, lat, zoom) {
