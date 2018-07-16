@@ -1,17 +1,18 @@
 String mapboxToken = "pk.eyJ1IjoiYmx1ZXBobGF2aW8iLCJhIjoiY2ppMGFlNGhnMDAzcTNwcGpxbXA1dHAxdiJ9.wxN7uepuQStutK1vvxFzBg";
-
-String style = "bluephlavio/cjin553wo0vr92rrynvsksfuv";
+String mapboxStyle = "bluephlavio/cjin553wo0vr92rrynvsksfuv";
 int sizeX = 1024;
 int sizeY = 720;
 int centerX = 0;
 int centerY = 0;
 int zoom = 1;
 
-String mapURI = "https://api.mapbox.com/styles/v1/" + style + "/static/" + 
+String mapURI = "https://api.mapbox.com/styles/v1/" + mapboxStyle + "/static/" + 
   centerX + "," + centerY + "," + zoom + ",0,0/" + sizeX + "x" + sizeY + 
   "?access_token=" + mapboxToken;
 
 PImage mapImg = null;
+
+String apiEndpoint = "http://www.hotcities.world/api/";
 
 String fontURI = "./fonts/Quicksand-Bold.otf";
 
@@ -116,8 +117,8 @@ void keyPressed() {
 
 void setup() {
   mapImg = loadImage(mapURI, "jpg");
-  cities = loadJSONArray("../../data/cities.json");
-  records = loadJSONArray("../../data/records.json");
+  cities = loadJSONArray(apiEndpoint + "cities");
+  records = loadJSONArray(apiEndpoint + "records");
   for (int i = 0; i < records.size(); i++) {
     JSONObject record = records.getJSONObject(i);
     int geonameid = record.getInt("geonameid");
